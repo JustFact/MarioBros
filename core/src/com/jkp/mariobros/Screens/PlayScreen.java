@@ -38,6 +38,7 @@ public class PlayScreen implements Screen {//Screen represents many in-game scre
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("Level1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
+        gamecam.position.set(gamePort.getWorldWidth()/2,gamePort.getWorldHeight()/2,0);
     }
 
     @Override
@@ -45,14 +46,32 @@ public class PlayScreen implements Screen {//Screen represents many in-game scre
 
     }
 
+    public void handleInput(float dt){
+        if(Gdx.input.isTouched()){
+            gamecam.position.x += 100*dt;
+        }
+    }
+
+    public void update(float dt){
+        handleInput(dt);
+
+        gamecam.update();
+        renderer.setView(gamecam);
+    }
+
     @Override
     public void render(float delta) {
+        update(delta);
         Gdx.gl.glClearColor(0,0,0,1);   //clearing out color
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);           // clearing the screen
+
+        renderer.render();
+
 //        game.batch.setProjectionMatrix(gamecam.combined);
 //        game.batch.begin();
 //        game.batch.draw(texture, 0,0);      //adding the texture to the batch SpriteBatch
 //        game.batch.end();
+
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
     }
