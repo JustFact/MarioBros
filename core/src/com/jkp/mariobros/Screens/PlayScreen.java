@@ -6,6 +6,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -19,6 +22,11 @@ public class PlayScreen implements Screen {//Screen represents many in-game scre
     private OrthographicCamera gamecam;
     private Viewport gamePort;
     private Hud hud;
+
+    private TmxMapLoader mapLoader;
+    private TiledMap map;
+    private OrthogonalTiledMapRenderer renderer;
+
     public PlayScreen(MarioBros game){
         //A constructor because we are sending the game itself to the Screen
         this.game = game; //refreshes the game itself
@@ -26,7 +34,12 @@ public class PlayScreen implements Screen {//Screen represents many in-game scre
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(MarioBros.V_WIDTH,MarioBros.V_HEIGHT,gamecam);
         hud =  new Hud(game.batch);
+
+        mapLoader = new TmxMapLoader();
+        map = mapLoader.load("Level1.tmx");
+        renderer = new OrthogonalTiledMapRenderer(map);
     }
+
     @Override
     public void show() {
 
