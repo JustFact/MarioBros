@@ -1,29 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="72">
+<map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="right-down" width="123" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="72">
  <tileset firstgid="1" source="tileset_gutter.tsx"/>
- <layer id="1" name="background" width="240" height="13">
+ <layer id="16" name="background" width="123" height="13">
   <data encoding="base64" compression="zlib">
-   eJzt1UEKhDAQRcEgeBvB+83NhLmZG/eCjDYZv0ItCkI2CQ2PXobWFuCnb3ue9EzgLdKt6hfq7mpyvPBWeibwFuldq1+oS7eq3/Mms2GnV3PzyTv99rU+4A/kpHetfqEu3ap+oS7dqn6hrmd3n4OzfuE/0rtWv1Bn/wI9bQz45iE=
+   eJzt1MEJwCAQRNElkG4C9pfOhHSWSyoQDFmZ0fzDB/Ei7GOtW0SlYV3hk3oWq6Z2xRprmtd6f/GWeiarpt5hrPs7Ps4my6d03mGd2401DbTmD/dP7Yr1nNalccbao0zrs3HG2iP2+j857vUDJTuLrw==
   </data>
  </layer>
- <layer id="7" name="graphics" width="240" height="13">
+ <layer id="17" name="graphics" width="123" height="13">
   <data encoding="base64" compression="zlib">
-   eJztmL1KBDEQx2dznKBWdxZipaggqODh53GVYGcj9mrnA9he5UuooJa2YuE3Klj5EFa+h40TdsPFmGQnu3t36s4f/uwml83mlvwyk3wIgA82m53qyUox3gC7s/TVLx3h9zhGn4juv+sU33GGPu/Bu1gsl1zcms4ryny38RfCyR22uUc/WNr6+snC/RO2fUa/EJ9paaYqpC2rfKoKOr/VnHGGMt9t/IVykuX9Pu6L0nUEcIO+jejPML8snxSbC+DmVv8tVL3MZ/+ChgPbM78sn3RG2/CT3Tbk45cS1z5Fx2nyrQdF70db4M95KWuT2YfZj++/y7oW0L4Lq7xSbF6im1q5mdQVtf91aQfzyV30HiGv9K0HWfPsMUudPIIzuTOP5Shrk8qZbxy5s86vyWnId2GVW90+u0rTm2eO2mJYt/PKisMh0seq8uZ5SzsfpxfMbqkU4Rou0JUMOZdidQu9Db1jtwExvw3ouAgNYp9DfZz/+nmV4tbGr5SLU+a3XJpEbqfQ0xn3TEXHXRmzxsAfuwYg5ncAOpY6j2iWWsHrKnotKY/idRY955j/ckz1qHOv1xcpM+5S+K1H9npWObSZg90ZAa9y39uM79e7HX+nPF5KTC37bKqGXCyhR1L4yBLD69q9yW0av+a4mN/yKQ+/B4az8lszymZ8DGGOWqb2JxlZTDhZTljRx6ZLxXD1+2ggTyH82sbF/P5/XcH3fa/J7xF6QsQeN67vyfyQ1yT+Hip2Z8R3fvW2ql/XfpvKlM97ldjUcr+sxtGrsTwKmvv9Xdg07/9CfwHWMnYD
+   eJztlr1OwzAQxy+JWgmYWoaqE6hFqgRIVJSPqhMSGwtih248AGsnXqIgQUdWxED5kACJiYdg6nuwcFZixTWOc3acFCT+0l+JXcdx7+e7eOIDTP7t3I3AjfdBbZu5ZqUhxuMCfenn/64rfMc1elTAu1wpibHsrKLERsXKJKaPOOYJ/awYq5vHZo+84NhX9BvxmZ5gqkzGpqnk01mXMu5fSmxUrExjavN+3R5xpXsPYIx+8OjPuGTNOW5AMmPxN1MVWVP/ghYMx+fFegA/OQ8gG2tKvnz5sdOk2zuuv5890Nddyj6W55Dn0f131tcDWlyo4hxv0V2h3Y36XH2vk3SMNe0E3SfUNt3esa31dUUfO17KjOQjJ2Uf87o9TqjfImuZqUlcTJT3uSxNH5r/o8oNl7VNpSDBJhLXymv3umKcjumNJi4e7g0fHVjkPed6iD6C4ji3IWTdhtguNIdzzjvOCROJZzHOWMWaKYmpjnUDGTfRK5Y13nU+s1yogz4nyhCyLkNsppFHM9M2XnfQu1G7htdV9FpCrNiaql58L/a7lJzPFNZVT92v0kEGzi0f3tl3uhve7+Wd102NO5GpbZ1lVTCGHfRiSixtakNVuJcZp7GW15Un6zPJtqwrUlvOOxM+1DZ1PhbPzSimW1FcxbWJ4rWB/14z5G7CWrUumfUdTH+nZdZD9LIfekm6fkZzsWuU1+ecc8ufZi2O5fMmnQ+o8de5H4Smtmdlvo4i1nL6C/0N9Fr4uw==
   </data>
  </layer>
  <objectgroup id="8" name="ground">
-  <object id="4" x="3308" y="24" width="59.5" height="19">
-   <text wrap="1" color="#ffffff">Credits:</text>
-  </object>
-  <object id="7" x="3363.5" y="24.5" width="114" height="19">
-   <text wrap="1" color="#ffffff">Jaspreet Singh</text>
-  </object>
-  <object id="10" x="3363.5" y="42.5" width="114" height="19">
-   <text wrap="1" color="#ffffff">Kritesh Pant</text>
-  </object>
-  <object id="11" x="3363.5" y="63.5" width="114" height="19">
-   <text wrap="1" color="#ffffff">Priyum Dua</text>
-  </object>
   <object id="13" x="0" y="192.182" width="271.818" height="16"/>
   <object id="14" x="128.125" y="176.063" width="143.813" height="15.8125"/>
   <object id="15" x="160" y="160.063" width="111.938" height="15.9375"/>

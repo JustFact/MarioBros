@@ -6,15 +6,21 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.jkp.mariobros.MarioBros;
 import com.jkp.mariobros.Scenes.Hud;
+import com.jkp.mariobros.Sprites.Mario;
 
 public class PlayScreen implements Screen {//Screen represents many in-game screens(main menu, setting screen, game screen)
     private MarioBros game;
@@ -26,6 +32,11 @@ public class PlayScreen implements Screen {//Screen represents many in-game scre
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
+
+    private World world;
+    private Box2DDebugRenderer b2dr;
+
+    private Mario player;
 
     public PlayScreen(MarioBros game){
         //A constructor because we are sending the game itself to the Screen
@@ -39,6 +50,67 @@ public class PlayScreen implements Screen {//Screen represents many in-game scre
         map = mapLoader.load("Level1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
         gamecam.position.set(gamePort.getWorldWidth()/2,gamePort.getWorldHeight()/2,0);
+
+        world = new World(new Vector2(0,-10), true);
+        b2dr = new Box2DDebugRenderer();
+
+        BodyDef bdef = new BodyDef();
+        PolygonShape shape  = new PolygonShape();
+        FixtureDef fdef = new FixtureDef();
+        Body body;
+
+        for(MapObject object: map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            bdef.type = BodyDef.BodyType.StaticBody;
+            bdef.position.set(rect.getX()+rect.getWidth()/2,rect.getY()+rect.getHeight()/2);
+
+            body = world.createBody(bdef);
+
+            shape.setAsBox(rect.getWidth()/2,rect.getHeight()/2);
+            fdef.shape = shape;
+            body.createFixture(fdef);
+        }
+
+        for(MapObject object: map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            bdef.type = BodyDef.BodyType.StaticBody;
+            bdef.position.set(rect.getX()+rect.getWidth()/2,rect.getY()+rect.getHeight()/2);
+
+            body = world.createBody(bdef);
+
+            shape.setAsBox(rect.getWidth()/2,rect.getHeight()/2);
+            fdef.shape = shape;
+            body.createFixture(fdef);
+        }
+
+        for(MapObject object: map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            bdef.type = BodyDef.BodyType.StaticBody;
+            bdef.position.set(rect.getX()+rect.getWidth()/2,rect.getY()+rect.getHeight()/2);
+
+            body = world.createBody(bdef);
+
+            shape.setAsBox(rect.getWidth()/2,rect.getHeight()/2);
+            fdef.shape = shape;
+            body.createFixture(fdef);
+        }
+
+        for(MapObject object: map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            bdef.type = BodyDef.BodyType.StaticBody;
+            bdef.position.set(rect.getX()+rect.getWidth()/2,rect.getY()+rect.getHeight()/2);
+
+            body = world.createBody(bdef);
+
+            shape.setAsBox(rect.getWidth()/2,rect.getHeight()/2);
+            fdef.shape = shape;
+            body.createFixture(fdef);
+        }
+        player = new Mario(world);
     }
 
     @Override
@@ -55,6 +127,8 @@ public class PlayScreen implements Screen {//Screen represents many in-game scre
     public void update(float dt){
         handleInput(dt);
 
+        world.step(1/60f,6,2);
+
         gamecam.update();
         renderer.setView(gamecam);
     }
@@ -67,6 +141,7 @@ public class PlayScreen implements Screen {//Screen represents many in-game scre
 
         renderer.render();
 
+        b2dr.render(world,gamecam.combined);
 //        game.batch.setProjectionMatrix(gamecam.combined);
 //        game.batch.begin();
 //        game.batch.draw(texture, 0,0);      //adding the texture to the batch SpriteBatch
