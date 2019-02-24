@@ -11,6 +11,7 @@ import com.jkp.mariobros.Screens.PlayScreen;
 public class MarioBros extends Game {
 	public static final int V_WIDTH = 384;//500;	//1280
 	public static final int V_HEIGHT = 216;//300;	//720
+	public static final float PPM = 100;
 	public SpriteBatch batch;	//Act as container for images/textures etc. Whole game will only have 1 SpriteBatch for memory efficiency.
 	
 	@Override
