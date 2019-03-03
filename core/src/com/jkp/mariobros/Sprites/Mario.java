@@ -22,10 +22,13 @@ public class Mario extends Sprite {
 
 
         FixtureDef fdef = new FixtureDef();
-        CircleShape shape = new CircleShape();
-        shape.setRadius(5/MarioBros.PPM);
+        PolygonShape squareShape = new PolygonShape();
+        squareShape.setAsBox(0.05f,0.05f);           //Square shape mario
 
-        fdef.shape = shape;
+        CircleShape circleShape = new CircleShape();
+        circleShape.setRadius(5/MarioBros.PPM);
+
+        fdef.shape = squareShape;
         fdef.friction = 0.8f;
         b2body.createFixture(fdef);
     }
