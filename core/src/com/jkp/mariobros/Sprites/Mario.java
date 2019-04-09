@@ -3,6 +3,7 @@ package com.jkp.mariobros.Sprites;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.jkp.mariobros.MarioBros;
@@ -27,6 +28,8 @@ public class Mario extends Sprite {
         stateTimer = 0;
         runningRight = true;
 
+
+        // PREPARING TEXTURE FRAMES FOR ANIMATION
         Array<TextureRegion> frames = new Array<TextureRegion>();
         for(int i = 1; i<4;i++){            //Running animation frames
             frames.add(new TextureRegion(getTexture(),i*16,0,16,16));
@@ -39,32 +42,39 @@ public class Mario extends Sprite {
         }
         marioJump = new Animation(0.1f,frames);
 
+        //MARIO STANDING TEXTURE CODE
         marioStand = new TextureRegion(getTexture(),0,0,16,16);
         setBounds(0,0,16/MarioBros.PPM,16/MarioBros.PPM);
         setRegion(marioStand);
+
         this.world = world;
         defineMario();
     }
 
+
+
+
+    //MAKING ANIMATION RUN
     public void update(float dt){
         setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2);
         setRegion(getFrame(dt));
     }
 
+
+
+
+
     public TextureRegion getFrame(float dt){
         currentState = getState();
         TextureRegion region;
         switch (currentState){
-            case JUMPING:
-                region = (TextureRegion) marioJump.getKeyFrame(stateTimer);
+            case JUMPING: region = (TextureRegion) marioJump.getKeyFrame(stateTimer);
                 break;
-            case RUNNING:
-                region = (TextureRegion) marioRun.getKeyFrame(stateTimer, true);
+            case RUNNING: region = (TextureRegion) marioRun.getKeyFrame(stateTimer, true);
                 break;
             case FALLING:
             case STANDING:
-                default:
-                    region = marioStand;
+                default: region = marioStand;
                     break;
         }
         if((b2body.getLinearVelocity().x<0||!runningRight)&& !region.isFlipX()){
@@ -79,6 +89,8 @@ public class Mario extends Sprite {
         return region;
     }
 
+
+    //CODE TO KNOW CURRENT STATE OF MARIO (RUNNING, JUMPING, OR STANDING)
     public State getState(){
         if(b2body.getLinearVelocity().y>0 || (b2body.getLinearVelocity().y<0 && previousState == State.JUMPING)){
             return State.JUMPING;
@@ -90,6 +102,8 @@ public class Mario extends Sprite {
             return  State.STANDING;
         }
     }
+
+
 
     public void defineMario(){
         BodyDef bdef = new BodyDef();
@@ -103,10 +117,21 @@ public class Mario extends Sprite {
         squareShape.setAsBox(0.05f,0.06f);           //Square shape mario
 
         CircleShape circleShape = new CircleShape();
-        circleShape.setRadius(5/MarioBros.PPM);
+        circleShape.setRadius(6/MarioBros.PPM);
+        fdef.filter.categoryBits = MarioBros.MARIO_BIT;
+        fdef.filter.maskBits = MarioBros.DEFAULT_BIT | MarioBros.COIN_BIT | MarioBros.BRICK_BIT;
 
-        fdef.shape = squareShape;
+        fdef.shape = circleShape;
         fdef.friction = 0.8f;
         b2body.createFixture(fdef);
+
+        EdgeShape head = new EdgeShape();
+        head.set(new Vector2(-2/MarioBros.PPM, 7/MarioBros.PPM),new Vector2(2/MarioBros.PPM, 7/MarioBros.PPM));
+        fdef.shape = head;
+        fdef.isSensor = true;
+
+        b2body.createFixture(fdef).setUserData("head");
+
+
     }
 }

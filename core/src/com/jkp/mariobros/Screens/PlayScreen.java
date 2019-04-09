@@ -24,6 +24,7 @@ import com.jkp.mariobros.MarioBros;
 import com.jkp.mariobros.Scenes.Hud;
 import com.jkp.mariobros.Sprites.Mario;
 import com.jkp.mariobros.Tools.B2WorldCreator;
+import com.jkp.mariobros.Tools.WorldContactListener;
 
 public class PlayScreen implements Screen {//Screen represents many in-game screens(main menu, setting screen, game screen)
     private MarioBros game;
@@ -42,6 +43,7 @@ public class PlayScreen implements Screen {//Screen represents many in-game scre
     private Box2DDebugRenderer b2dr;
 
     private Mario player;
+    private Mario player2;
 
 
 
@@ -66,6 +68,9 @@ public class PlayScreen implements Screen {//Screen represents many in-game scre
         new B2WorldCreator(world, map);
 
         player = new Mario(world,this);
+        player2 = new Mario(world,this);
+
+        world.setContactListener(new WorldContactListener());
     }
 
     public TextureAtlas getAtlas(){
@@ -85,12 +90,22 @@ public class PlayScreen implements Screen {//Screen represents many in-game scre
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -1)
             player.b2body.applyLinearImpulse(new Vector2(-0.1f,0), player.b2body.getWorldCenter(), true);
 
+
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.W) && player2.b2body.getLinearVelocity().y == 0)
+            player2.b2body.applyLinearImpulse(new Vector2(0,3.5f), player2.b2body.getWorldCenter(), true);
+        if(Gdx.input.isKeyPressed(Input.Keys.D) && player2.b2body.getLinearVelocity().x<=1)
+            player2.b2body.applyLinearImpulse(new Vector2(0.1f,0), player2.b2body.getWorldCenter(), true);
+        if(Gdx.input.isKeyPressed(Input.Keys.A) && player2.b2body.getLinearVelocity().x >= -1)
+            player2.b2body.applyLinearImpulse(new Vector2(-0.1f,0), player2.b2body.getWorldCenter(), true);
+
     }
 
     public void update(float dt){
         handleInput(dt);
         world.step(1/60f,6,2);
         player.update(dt);
+        player2.update(dt);
         gamecam.position.x = player.b2body.getPosition().x;
         gamecam.update();
         renderer.setView(gamecam);
@@ -112,6 +127,7 @@ public class PlayScreen implements Screen {//Screen represents many in-game scre
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
+        player2.draw(game.batch);
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
