@@ -90,11 +90,11 @@ public class PlayScreen implements Screen {//Screen represents many in-game scre
 
 
 
-        if(controller.isUpPressed() && player2.b2body.getLinearVelocity().y == 0)
+        if(controller.isUpPressed2() && player2.b2body.getLinearVelocity().y == 0)
             player2.b2body.applyLinearImpulse(new Vector2(0,3.5f), player2.b2body.getWorldCenter(), true);
-        if(controller.isRightPressed()&& player2.b2body.getLinearVelocity().x<=1)
+        if(controller.isRightPressed2()&& player2.b2body.getLinearVelocity().x<=1)
             player2.b2body.applyLinearImpulse(new Vector2(0.1f,0), player2.b2body.getWorldCenter(), true);
-        if(controller.isLeftPressed()&& player2.b2body.getLinearVelocity().x >= -1)
+        if(controller.isLeftPressed2()&& player2.b2body.getLinearVelocity().x >= -1)
             player2.b2body.applyLinearImpulse(new Vector2(-0.1f,0), player2.b2body.getWorldCenter(), true);
 
     }

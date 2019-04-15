@@ -16,6 +16,7 @@ public class Controller {
 Viewport viewport;
 public Stage stage;
 boolean upPressed,leftPressed, rightPressed;
+boolean upPressed2,leftPressed2, rightPressed2;
 OrthographicCamera cam;
 
 public Controller(){
@@ -24,10 +25,18 @@ public Controller(){
     stage = new Stage(viewport, MarioBros.batch);
     Gdx.input.setInputProcessor(stage);
 
+    Table Ptable = new Table();
+    Ptable.bottom();
+    Ptable.setFillParent(true);
+
     Table table = new Table();
     table.left().bottom();
 
-    int scale = 50;
+    Table table2 = new Table();
+    table2.right().bottom();
+
+    int scale = 60;
+
 
     Image upImg = new Image(new Texture("Up.png"));
     upImg.setWidth(scale);
@@ -78,6 +87,58 @@ public Controller(){
         }
     });
 
+    //========================
+
+
+    Image upImg2 = new Image(new Texture("Up.png"));
+    upImg2.setWidth(scale);
+    upImg2.setHeight(scale);
+    upImg2.addListener(new InputListener(){
+
+        @Override
+        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            upPressed2 = true;
+            return true;
+        }
+
+        @Override
+        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            upPressed2 = false;
+        }
+    });
+
+    Image leftImg2 = new Image(new Texture("Left.png"));
+    leftImg2.setWidth(scale);
+    leftImg2.setHeight(scale);
+    leftImg2.addListener(new InputListener(){
+
+        @Override
+        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            leftPressed2 = true;
+            return true;
+        }
+
+        @Override
+        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            leftPressed2 = false;
+        }
+    });
+
+    Image rightImg2 = new Image(new Texture("Right.png"));
+    rightImg2.setWidth(scale);
+    rightImg2.setHeight(scale);
+    rightImg2.addListener(new InputListener(){
+        @Override
+        public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            rightPressed2 = true;
+            return true;
+        }
+        @Override
+        public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            rightPressed2 = false;
+        }
+    });
+
     table.add();
     table.add(upImg).size(upImg.getWidth(), upImg.getHeight());
     table.add();
@@ -90,7 +151,24 @@ public Controller(){
     table.add().size(leftImg.getWidth(), leftImg.getHeight());
     table.add();
 
-    stage.addActor(table);
+    table2.add();
+    table2.add(upImg2).size(upImg2.getWidth(), upImg2.getHeight());
+    table2.add();
+    table2.row().pad(5, 5, 5, 5);
+    table2.add(leftImg2).size(leftImg2.getWidth(), leftImg2.getHeight());
+    table2.add();
+    table2.add(rightImg2).size(rightImg2.getWidth(), rightImg2.getHeight());
+    table2.row().padBottom(5);
+    table2.add();
+    table2.add().size(leftImg2.getWidth(), leftImg2.getHeight());
+    table2.add();
+
+//.padLeft(250)
+    Ptable.add(table).expandX().padBottom(-70);
+    Ptable.add().expandX();
+    Ptable.add().expandX();
+    Ptable.add(table2).expandX().padBottom(-70);
+    stage.addActor(Ptable);
 }
 
 public void draw(){
@@ -103,6 +181,18 @@ public void draw(){
 
     public boolean isLeftPressed() {
         return leftPressed;
+    }
+
+    public boolean isUpPressed2() {
+        return upPressed2;
+    }
+
+    public boolean isLeftPressed2() {
+        return leftPressed2;
+    }
+
+    public boolean isRightPressed2() {
+        return rightPressed2;
     }
 
     public boolean isRightPressed() {
