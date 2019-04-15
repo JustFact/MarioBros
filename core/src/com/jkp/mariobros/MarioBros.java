@@ -19,7 +19,7 @@ public class MarioBros extends Game {
 	public static final short COIN_BIT = 8;
 	public static final short DESTROYED_BIT = 16;
 
-	public SpriteBatch batch;	//Act as container for images/textures etc. Whole game will only have 1 SpriteBatch for memory efficiency.
+	public static SpriteBatch batch;	//Act as container for images/textures etc. Whole game will only have 1 SpriteBatch for memory efficiency.
 	
 	@Override
 	public void create () {

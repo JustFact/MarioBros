@@ -6,9 +6,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.jkp.mariobros.MarioBros;
@@ -41,6 +43,9 @@ public class Hud implements Disposable {
         table.top(); //put table on top of the stage.
         table.setFillParent(true);//set table to size of the stage
 
+        Image img = new Image(new Texture("Up.png"));
+
+
         countdownLabel  = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel      = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel       = new Label("Priyum Dua", new Label.LabelStyle(new BitmapFont(), Color.BLACK));
@@ -55,6 +60,7 @@ public class Hud implements Disposable {
         table.add(scoreLabel).expandX();
         table.add(levelLabel).expandX();
         table.add(countdownLabel).expandX();
+//        table.add(img);
 
         stage.addActor(table);
 
